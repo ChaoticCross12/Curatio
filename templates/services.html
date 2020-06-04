@@ -1,0 +1,13 @@
+<head>
+    <title>services</title>
+</head>
+
+<body>
+    <div>
+        {% for i in range(3) %}
+            {% set service = services[i] %}
+            {% set link = services_link[i] %}
+            <ol><a href="{{ link }}"> {{ service }} </a></ol>
+        {% endfor %}
+    </div>
+</body>
