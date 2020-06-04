@@ -14,7 +14,15 @@ def home():
     return render_template('login.html')
 
 
-# Your URL page
+# Sign Up page
+@app.route('/signUp', methods = ['GET', 'POST'])
+def signUpPage():
+    return render_template('signUp.html')
+
+
+
+
+# Logging in
 @app.route('/placeholder', methods = ['GET', 'POST'])
 def your_url():
 

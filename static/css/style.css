@@ -88,18 +88,3 @@ body
     cursor: pointer;
     margin: 12px 0;
 }
-
-.signUpBtn
-{
-  width: 100%;
-  background: none;
-  background-color: none;
-  outline: none;
-  border: 2px solid #06827b;
-  color: black;
-  padding: 5px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  margin: 12px 0;
-}
