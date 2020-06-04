@@ -29,10 +29,8 @@ def signUpPage():
     return render_template('signUp.html')
 
 
-
-
 # Logging in
-@app.route('/placeholder', methods = ['GET', 'POST'])
+@app.route('/login_handler', methods = ['GET', 'POST'])
 def your_url():
 
     # Check method
@@ -55,7 +53,7 @@ def your_url():
             if request.form['password'] == loginData[request.form['client']][request.form['username']]:
 
                 # If correct username and password
-                return render_template('placeholder.html')
+                return services()
 
 
 @app.route('/services')
