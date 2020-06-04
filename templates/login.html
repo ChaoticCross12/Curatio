@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <title>Curatio Login</title>
+  </head>
+
+  <body>
+    <div class="title-box">
+
+      <h1>CURATIO</h1>
+
+    </div>
+
+    <div class="login-box">
+      <form action = "placeholder" method="post">
+
+          <h1>Login</h1>
+
+          <div class="text-box">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <input type="text" placeholder="Username" name="username" value="" required>
+              <br>
+
+          </div>
+
+          <div class="text-box">
+              <i class="fa fa-key" aria-hidden="true"></i>
+              <input type="password" placeholder="Password" name="password" value="" required>
+              <br>
+          </div>
+
+          <div class="radio">
+
+            <input type="radio" id="patient" name="client" value="patient" required>
+            <label for="patient">Patient</label>
+            <input type="radio" id="doctor" name="client" value="doctor">
+            <label for="doctor">Doctor</label>
+
+          </div>
+
+          <input class="btn" type="submit" name="" value="SIGN IN">
+      </form>
+    </div>
+  </body>
+</html>
