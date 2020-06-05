@@ -2,5 +2,5 @@ Installations before testing:
 1) pipenv
 2) flask
 3) flask_googlemaps
-4) googleplaces
+4) python-google-places
 5) ipinfo
