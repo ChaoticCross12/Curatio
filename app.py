@@ -30,7 +30,7 @@ def signUpPage():
 
 
 # Logging in
-@app.route('/login_handler', methods = ['GET', 'POST'])
+@app.route('/home', methods = ['GET', 'POST'])
 def your_url():
 
     # Check method
@@ -53,48 +53,65 @@ def your_url():
             if request.form['password'] == loginData[request.form['client']][request.form['username']]:
 
                 # If correct username and password
+
+                # returns homepage
                 return services()
 
+
+#### HOME PAGE ####
 
 @app.route('/services')
 def services():
     # list names of services (shown to user)
     services = [
-               "Treatment",
+               "Treatment Physical",
+               "Treatment mental",
                "Find nearest clinic",
                "Find nearest drugstore"
                ]
-    # links of services
+    # routes of services
     services_link = [
-                    "treatment",
+                    "treatment_physical",
+                    "treatment_mental",
                     "nearest_clinic",
                     "nearest_drugstore"
                     ]
-
 
     return render_template('services.html', services=services,
                             services_link=services_link)
 
 
+
+@app.route('/treatment_physical')
+def treatment_physical():
+
+    return render_template('treatment_physical.html')
+
+
+@app.route('/treatment_mental')
+def treatment_mental():
+
+    return render_template('treatment_mental.html')
+
+
 @app.route('/nearest_clinic')
 def clinic():
-    # calls mapview() and displays "hospital"
+    # displays "hospital" in map
     items = mapview("hospital")
-    return render_template('nearest_clinic.html', map=items[0], name=items[1])
+    return render_template('map.html', title="Clinic", map=items[0], name=items[1])
 
 
 @app.route('/nearest_drugstore')
 def drugstore():
-    # calls mapview() and displays "pharmacy"
+    # displays "pharmacy" in map
     items = mapview("pharmacy")
-    return render_template('nearest_drugstore.html', map=items[0], name=items[1])
+    return render_template('map.html', title="Drugstore", map=items[0], name=items[1])
 
 
 # detect location using IP
 def ip_coordinates():
     ipinfo_token = '0562b9f1a0bc99'
-    handler = ipinfo.getHandler(ipinfo_token)
-    ip_data = handler.getDetails()
+    ip_data = ipinfo.getHandler(ipinfo_token).getDetails()
     # city = data.city + data.region + data.country
     latitude = ip_data.latitude
     longitude = ip_data.longitude
@@ -108,7 +125,10 @@ def mapview(itemtype):
     if itemtype == "pharmacy":
         search_type = [types.TYPE_PHARMACY]
         pass
-    
+    if itemtype == "":
+        return "itemtype not provided"
+
+    # using googleplaces to search nearby
     places = GooglePlaces(MAPS_API_KEY)
     coordinates = ip_coordinates()
     latitude = coordinates[0]
@@ -135,6 +155,7 @@ def mapview(itemtype):
         markers.append(location_of_item)
         name.append(item_name)
 
+    # using flask_googlemaps to display map
     map_data = Map(
         identifier="map",
         lat=item_latitude,
