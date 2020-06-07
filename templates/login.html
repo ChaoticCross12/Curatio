@@ -14,6 +14,12 @@
 
     </div>
 
+
+    {% for message in get_flashed_messages() %}
+    <h2>{{ message }}</h2>
+    {% endfor %}
+
+
     <div class="login-box">
       <form action = "home" method="post">
 
@@ -48,7 +54,7 @@
       <form action = "signUp" method="post">
           <input class="btn" type="submit" name="" value="NEW? SIGN UP" action = "signUp">
       </form>
-      
+
     </div>
   </body>
 </html>

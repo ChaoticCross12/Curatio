@@ -6,5 +6,30 @@
   </head>
   <body>
     <h1>Sign Up</h1>
+
+    {% for message in get_flashed_messages() %}
+    <h2>{{ message }}</h2>
+    {% endfor %}
+
+    <div class="signInForm">
+
+      <form action="/" method="post">
+
+        <input type="text" placeholder="Username" name="username" value="" required>
+        <br>
+        <input type="password" placeholder="Password" name="password" value="" required>
+        <br>
+        <input type="password" placeholder="Confirm Password" name="ConfPassword" value="" required>
+        <br>
+        <input type="radio" id="patient" name="client" value="patient" required>
+        <label for="patient">Patient</label>
+        <input type="radio" id="doctor" name="client" value="doctor">
+        <label for="doctor">Doctor</label>
+        <br>
+          <input class="" type="submit" name="" value="SIGN UP">
+
+      </form>
+    </div>
+
   </body>
 </html>
