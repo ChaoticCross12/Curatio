@@ -10,7 +10,7 @@ from googleplaces import GooglePlaces, types, lang
 # Begining app
 app = Flask(__name__)
 app.secret_key = "suidhfliasdfoagdrgdeocf"
-app.run(debug=True)
+#app.run(debug=True)
 
 MAPS_API_KEY = 'AIzaSyCskEcqqtB89CfG-jJXihqF20SZSlRxzFo'
 app.config['GOOGLEMAPS_KEY'] = MAPS_API_KEY
@@ -30,7 +30,7 @@ def signUpPage():
 
 
 # Logging in
-@app.route('/home', methods = ['GET', 'POST'])
+@app.route('/home', methods = ['GE9T', 'POST'])
 def your_url():
 
     # Check method
@@ -98,14 +98,14 @@ def treatment_mental():
 def clinic():
     # displays "hospital" in map
     items = mapview("hospital")
-    return render_template('map.html', title="Clinic", map=items[0], name=items[1])
+    return render_template('map.html', title="Clinic", map=items[0], name=items[1], maps_link=items[2])
 
 
 @app.route('/nearest_drugstore')
 def drugstore():
     # displays "pharmacy" in map
     items = mapview("pharmacy")
-    return render_template('map.html', title="Drugstore", map=items[0], name=items[1])
+    return render_template('map.html', title="Drugstore", map=items[0], name=items[1], maps_link=items[2])
 
 
 # detect location using IP
@@ -136,7 +136,7 @@ def mapview(itemtype):
 
     search_result = places.nearby_search(
         lat_lng={'lat': latitude, 'lng': longitude},
-        radius=3000,
+        radius=2000,
         types=search_type
     )
 
@@ -145,15 +145,20 @@ def mapview(itemtype):
 
     markers = []
     name = []
+    maps_link = []
+
     for place in search_result.places:
         # place.get_details()
         item_name = place.name
         item_latitude = place.geo_location['lat']
         item_longitude = place.geo_location['lng']
         # item_address = place.formatted_address
-        location_of_item = { 'lat': str(item_latitude), 'lng': str(item_longitude), 'infobox': item_name}
+        location_of_item = { 'lat': str(item_latitude), 'lng': str(item_longitude), 'infobox': "<a id='pointerlink' href='https://www.google.com/maps/search/?api=1&query=" + item_name.replace(" ", "+") + "'>" + item_name + "</a>"}
         markers.append(location_of_item)
         name.append(item_name)
+        #maps_link.append("http://maps.google.com/?q=" + str(item_latitude) + "," + str(item_longitude))
+        maps_link.append("https://www.google.com/maps/search/?api=1&query=" + item_name.replace(" ", "+"))
+
 
     # using flask_googlemaps to display map
     map_data = Map(
@@ -161,8 +166,8 @@ def mapview(itemtype):
         lat=item_latitude,
         lng=item_longitude,
         markers=markers,
-        style="height:80%;width:100%;margin:auto;",
+        style="height:95%;width:70%;margin:0px;",
         zoom=16
     )
 
-    return map_data, name
+    return map_data, name, maps_link
