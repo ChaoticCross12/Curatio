@@ -57,6 +57,15 @@ def your_url():
                 # returns homepage
                 return services()
 
+            else:
+                flash('Incorrect username or password')
+                return render_template('login.html')
+
+
+        else:
+            flash('Incorrect username or password')
+            return render_template('login.html')
+
 
 #### HOME PAGE ####
 
@@ -171,3 +180,48 @@ def mapview(itemtype):
     )
 
     return map_data, name, maps_link
+
+
+# Signing up new user
+@app.route('/', methods = ['GET', 'POST'])
+def storeUserInfo():
+    # Check method
+    if request.method == 'POST':
+
+        # Dictioary for data
+        OldLoginData = {}
+
+        # Checking if json file exists
+        if os.path.exists('loginInfo.json'):
+
+            with open('loginInfo.json') as old_login_file:
+
+                # Adding data from json file to dictionary
+                OldLoginData = json.load(old_login_file)
+                loginDataSet = OldLoginData[request.form['client']]
+
+                if request.form['username'] in loginDataSet.keys():
+                    flash('Username already taken')
+                    return render_template('signUp.html')
+                    # FLASK MESSAGE
+
+                else:
+                    # NEEDS WORK
+                    loginDataSet[request.form['username']]  = request.form['password']
+                    OldLoginData[request.form['client']] = loginDataSet
+                    #
+
+            with open('loginInfo.json', 'w') as old_login_file:
+
+                # Adding dictionary to json file
+                json.dump(OldLoginData, old_login_file)
+                return render_template('login.html')
+
+
+
+
+        # If json file doesn't exist
+        else:
+            print('need work')
+            return render_template('login.html')
+            # TO BE CONTINUED
