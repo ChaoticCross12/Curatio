@@ -224,3 +224,16 @@ def storeUserInfo():
             print('need work')
             return render_template('login.html')
             # TO BE CONTINUED
+
+
+# Contact a general practitioner
+@app.route('/consult')
+def consult():
+
+    return render_template('consult.html')
+
+# Search results
+@app.route('/search')
+def list():
+
+    return render_template('list.html')
