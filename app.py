@@ -32,7 +32,6 @@ def signUpPage():
 # Logging in
 @app.route('/home', methods = ['GE9T', 'POST'])
 def your_url():
-
     # Check method
     if request.method == 'POST':
 

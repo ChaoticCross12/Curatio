@@ -1,60 +1,60 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-    <title>Curatio Login</title>
-  </head>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-  <body>
-    <div class="title-box">
+  <title>Curatio Login</title>
+</head>
 
-      <h1>CURATIO</h1>
+<body>
+  <div class="box">
 
-    </div>
+    <h1>CURATIO</h1>
 
-
-    {% for message in get_flashed_messages() %}
-    <h2>{{ message }}</h2>
-    {% endfor %}
+  </div>
 
 
-    <div class="login-box">
-      <form action = "home" method="post">
+  <div class="auth-box">
+    <form action="home" method="post">
 
-          <h1>Login</h1>
+      <h1>Login</h1>
 
-          <div class="text-box">
-              <i class="fa fa-user" aria-hidden="true"></i>
-              <input type="text" placeholder="Username" name="username" value="" required>
-              <br>
+      <div class="text-box">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <input type="text" placeholder="Username" name="username" value="" required>
+        <br>
+      </div>
 
-          </div>
+      <div class="text-box">
+        <i class="fa fa-key" aria-hidden="true"></i>
+        <input type="password" placeholder="Password" name="password" value="" required>
+        <br>
+      </div>
 
-          <div class="text-box">
-              <i class="fa fa-key" aria-hidden="true"></i>
-              <input type="password" placeholder="Password" name="password" value="" required>
-              <br>
-          </div>
+      <div class="radio">
+        <input type="radio" id="patient" name="client" value="patient" required>
+        <label for="patient">Patient</label>
+        <input type="radio" id="doctor" name="client" value="doctor">
+        <label for="doctor">Doctor</label>
+      </div>
 
-          <div class="radio">
-
-            <input type="radio" id="patient" name="client" value="patient" required>
-            <label for="patient">Patient</label>
-            <input type="radio" id="doctor" name="client" value="doctor">
-            <label for="doctor">Doctor</label>
-
-          </div>
-
-          <input class="btn" type="submit" name="" value="SIGN IN">
-      </form>
+      <div class="err_notice">
+        {% for message in get_flashed_messages() %}
+        <h2>{{ message }}</h2>
+        {% endfor %}
+      </div>
+      
+      <input class="btn" type="submit" name="" value="SIGN IN">
+    </form>
 
 
-      <form action = "signUp" method="post">
-          <input class="btn" type="submit" name="" value="NEW? SIGN UP" action = "signUp">
-      </form>
+    <form action="signUp" method="post">
+      <input class="btn" type="submit" name="" value="NEW? SIGN UP" action="signUp">
+    </form>
 
-    </div>
-  </body>
+  </div>
+</body>
+
 </html>
