@@ -1,11 +1,30 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, abort
 import json
 import os.path
+import ipinfo
+from dotenv import load_dotenv
 
+# google maps
+from flask_googlemaps import GoogleMaps, Map
+from googleplaces import GooglePlaces, types, lang
 
-# Degining app
+# Twilio
+from twilio.jwt.access_token import AccessToken
+from twilio.jwt.access_token.grants import VideoGrant
+
+load_dotenv()
+twilio_account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
+twilio_api_key_sid = os.environ.get('TWILIO_API_KEY_SID')
+twilio_api_key_secret = os.environ.get('TWILIO_API_KEY_SECRET')
+
+# Begining app
 app = Flask(__name__)
 app.secret_key = "suidhfliasdfoagdrgdeocf"
+#app.run(debug=True)
+
+MAPS_API_KEY = 'AIzaSyCskEcqqtB89CfG-jJXihqF20SZSlRxzFo'
+app.config['GOOGLEMAPS_KEY'] = MAPS_API_KEY
+GoogleMaps(app)
 
 
 # Initial Page
@@ -14,10 +33,15 @@ def home():
     return render_template('login.html')
 
 
-# Your URL page
-@app.route('/placeholder', methods = ['GET', 'POST'])
-def your_url():
+# Sign Up page
+@app.route('/signUp', methods = ['GET', 'POST'])
+def signUpPage():
+    return render_template('signUp.html')
 
+
+# Logging in
+@app.route('/home', methods = ['GE9T', 'POST'])
+def your_url():
     # Check method
     if request.method == 'POST':
 
@@ -38,4 +62,202 @@ def your_url():
             if request.form['password'] == loginData[request.form['client']][request.form['username']]:
 
                 # If correct username and password
-                return render_template('placeholder.html')
+
+                # returns homepage
+                return services()
+
+            else:
+                flash('Incorrect username or password')
+                return render_template('login.html')
+
+
+        else:
+            flash('Incorrect username or password')
+            return render_template('login.html')
+
+
+#### HOME PAGE ####
+
+@app.route('/services')
+def services():
+    # list names of services (shown to user)
+    services = [
+               "Treatment Physical",
+               "Treatment mental",
+               "Find nearest clinic",
+               "Find nearest drugstore"
+               ]
+    # routes of services
+    services_link = [
+                    "treatment_physical",
+                    "treatment_mental",
+                    "nearest_clinic",
+                    "nearest_drugstore"
+                    ]
+
+    return render_template('services.html', services=services,
+                            services_link=services_link)
+
+
+
+@app.route('/treatment_physical')
+def treatment_physical():
+
+    return render_template('treatment_physical.html')
+
+
+@app.route('/treatment_mental')
+def treatment_mental():
+
+    return render_template('treatment_mental.html')
+
+
+@app.route('/nearest_clinic')
+def clinic():
+    # displays "hospital" in map
+    items = mapview("hospital")
+    return render_template('map.html', title="Clinic", map=items[0], name=items[1], maps_link=items[2])
+
+
+@app.route('/nearest_drugstore')
+def drugstore():
+    # displays "pharmacy" in map
+    items = mapview("pharmacy")
+    return render_template('map.html', title="Drugstore", map=items[0], name=items[1], maps_link=items[2])
+
+
+# detect location using IP
+def ip_coordinates():
+    ipinfo_token = '0562b9f1a0bc99'
+    ip_data = ipinfo.getHandler(ipinfo_token).getDetails()
+    # city = data.city + data.region + data.country
+    latitude = ip_data.latitude
+    longitude = ip_data.longitude
+    return latitude, longitude
+
+
+def mapview(itemtype):
+    if itemtype == "hospital":
+        search_type = [types.TYPE_HOSPITAL]
+        pass
+    if itemtype == "pharmacy":
+        search_type = [types.TYPE_PHARMACY]
+        pass
+    if itemtype == "":
+        return "itemtype not provided"
+
+    # using googleplaces to search nearby
+    places = GooglePlaces(MAPS_API_KEY)
+    coordinates = ip_coordinates()
+    latitude = coordinates[0]
+    longitude = coordinates[1]
+
+    search_result = places.nearby_search(
+        lat_lng={'lat': latitude, 'lng': longitude},
+        radius=2000,
+        types=search_type
+    )
+
+    if search_result.has_attributions:
+        print(search_result.html_attributions)
+
+    markers = []
+    name = []
+    maps_link = []
+
+    for place in search_result.places:
+        # place.get_details()
+        item_name = place.name
+        item_latitude = place.geo_location['lat']
+        item_longitude = place.geo_location['lng']
+        # item_address = place.formatted_address
+        location_of_item = { 'lat': str(item_latitude), 'lng': str(item_longitude), 'infobox': "<a id='pointerlink' href='https://www.google.com/maps/search/?api=1&query=" + item_name.replace(" ", "+") + "'>" + item_name + "</a>"}
+        markers.append(location_of_item)
+        name.append(item_name)
+        #maps_link.append("http://maps.google.com/?q=" + str(item_latitude) + "," + str(item_longitude))
+        maps_link.append("https://www.google.com/maps/search/?api=1&query=" + item_name.replace(" ", "+"))
+
+
+    # using flask_googlemaps to display map
+    map_data = Map(
+        identifier="map",
+        lat=item_latitude,
+        lng=item_longitude,
+        markers=markers,
+        style="height:95%;width:70%;margin:0px;",
+        zoom=16
+    )
+
+    return map_data, name, maps_link
+
+
+# Signing up new user
+@app.route('/', methods = ['GET', 'POST'])
+def storeUserInfo():
+    # Check method
+    if request.method == 'POST':
+
+        # Dictioary for data
+        OldLoginData = {}
+
+        # Checking if json file exists
+        if os.path.exists('loginInfo.json'):
+
+            with open('loginInfo.json') as old_login_file:
+
+                # Adding data from json file to dictionary
+                OldLoginData = json.load(old_login_file)
+                loginDataSet = OldLoginData[request.form['client']]
+
+                if request.form['username'] in loginDataSet.keys():
+                    flash('Username already taken')
+                    return render_template('signUp.html')
+                    # FLASK MESSAGE
+
+                else:
+                    # NEEDS WORK
+                    loginDataSet[request.form['username']]  = request.form['password']
+                    OldLoginData[request.form['client']] = loginDataSet
+                    #
+
+            with open('loginInfo.json', 'w') as old_login_file:
+
+                # Adding dictionary to json file
+                json.dump(OldLoginData, old_login_file)
+                return render_template('login.html')
+
+
+
+
+        # If json file doesn't exist
+        else:
+            print('need work')
+            return render_template('login.html')
+            # TO BE CONTINUED
+
+
+# Contact a general practitioner
+@app.route('/consult')
+def consult():
+
+    return render_template('consult.html')
+
+# Search results
+@app.route('/search')
+def list():
+
+    return render_template('list.html')
+
+
+# Adding participant
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.get_json(force=True).get('username')
+    if not username:
+        abort(401)
+
+    token = AccessToken(twilio_account_sid, twilio_api_key_sid,
+                        twilio_api_key_secret, identity=username)
+    token.add_grant(VideoGrant(room='My Room'))
+
+    return {'token': token.to_jwt().decode()}

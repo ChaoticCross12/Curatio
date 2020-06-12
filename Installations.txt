@@ -1,0 +1,9 @@
+Installations before testing:
+1) pipenv
+2) flask
+3) flask_googlemaps
+4) googleplaces
+5) ipinfo
+6) twilio flask python-dotenv
+
+# used ngrok to gain access to network for testing client and server connection

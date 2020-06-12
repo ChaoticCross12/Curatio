@@ -7,6 +7,11 @@ verify_ssl = true
 
 [packages]
 flask = "*"
+flask-googlemaps = "*"
+python-google-places = "*"
+ipinfo = "*"
+twilio = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.8"

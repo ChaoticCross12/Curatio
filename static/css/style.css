@@ -1,52 +1,57 @@
 @import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 
-body
-{
+body {
     margin: 0;
     padding: 0;
-    font-family: "Arial Black";
+    font-family: "Arial Black", sans-serif, serif;
     background: url(bg.jpg) no-repeat;
     background-size: cover;
 }
 
-.title-box
-{
-    width: 280px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-100%, -150%);
+.container {
+    background-color: white;
+}
+.box {
+    margin: auto;
+    text-align: center;
     color: black;
+    margin-top: 5%;
+    margin-bottom: 50px;
+
 }
 
-.title-box h1
-{
+.box h1 {
+    margin: auto;
+    font-size: 5.5vw;
+    border-bottom: 6px solid #06827b;
+    width: fit-content;
+    font-weight: bold;
+}
+
+.box h2 {
+    margin: auto;
+    font-size: 2.2vw;
+    border-bottom: 6px solid #06827b;
+    width: fit-content;
+    font-weight: bold;
+}
+
+.auth-box {
+    width: 280px;
+    margin-top: 10%;
+    margin-left: 10%;
+    color: black;
+
+}
+
+.auth-box h1 {
     float: left;
-    font-size: 120px;
+    font-size: 2.2vw;
     border-bottom: 6px solid #06827b;
     margin-bottom: 50px;
 }
 
-.login-box
-{
-    width: 280px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-250%, -50%);
-    color: black;
-}
-
-.login-box h1
-{
-    float: left;
-    font-size: 40px;
-    border-bottom: 6px solid #06827b;
-    margin-bottom: 50px;
-}
-
-.text-box
-{
+.text-box {
     width: 100%;
     overflow: hidden;
     font-size: 20px;
@@ -55,15 +60,13 @@ body
     border-bottom: 1px solid #06827b;
 }
 
-.text-box i
-{
+.text-box i {
     width: 26px;
     float: left;
     text-align: center;
 }
 
-.text-box input
-{
+.text-box input {
     border: none;
     outline: none;
     background: none;
@@ -74,8 +77,7 @@ body
     margin: 0 10px;
 }
 
-.btn
-{
+.btn {
     width: 100%;
     background: none;
     background-color: none;
@@ -89,17 +91,17 @@ body
     margin: 12px 0;
 }
 
-.signUpBtn
-{
-  width: 100%;
-  background: none;
-  background-color: none;
-  outline: none;
-  border: 2px solid #06827b;
-  color: black;
-  padding: 5px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  margin: 12px 0;
+.err_notice h2 {
+    width: 100%;
+    background: none;
+    background-color: none;
+    outline: none;
+    border-bottom: 6px solid #e44742;
+    width: fit-content;
+    color: black;
+    padding: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 12px 0;
 }

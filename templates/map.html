@@ -1,0 +1,24 @@
+<head>
+    <title>Nearest {{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/map_template.css">
+    {{map.js}}
+</head>
+
+<body>
+    <div id="header"><div id="logo">CURATIO</div></div>
+    <div class="container" style="display: flex;">
+        <div id="map" class="a">{{map.html}}</div>
+        <div id="list" class="b">
+            <div id="nearby_header">
+                {{title}}s Nearby
+            </div>
+            <ul>
+                {% for i in range(name|length) %}
+                {% set name = name[i] %}
+                {% set link = maps_link[i] %}
+                <li><a href="{{ link }}"> {{ name }} </a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
