@@ -1,0 +1,97 @@
+body {
+    font-family: sans-serif, serif;
+}
+
+.container {
+    width: 80%;
+    text-align: center;
+    margin: auto
+}
+
+.box {
+    color: black;
+    padding: 0px;
+    border: 6px solid #06827b;
+    margin-bottom: 0px;
+
+}
+
+input[type="checkbox"i] {
+    background-color: initial;
+    cursor: default;
+    -webkit-appearance: checkbox;
+    box-sizing: border-box;
+    margin: 3px 3px 13px 20px;
+    padding: initial;
+    border: initial;
+}
+
+.box h2 {
+    font-size: 20px;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    background-color: #06827b;
+    border-bottom: 6px solid #06827b;
+    margin: 0px;
+    margin-bottom: 0px;
+
+}
+
+
+.box div {
+    padding: 20px;
+    text-align: left;
+
+}
+
+
+.box .consult {
+    background-color: #06827b;
+    padding: 20px;
+    font-size: 22px;
+    color: white;
+    margin: 0px;
+    text-align: center;
+}
+
+.box a {
+    color: white;
+    text-weight: bold;
+
+}
+
+input[type=text] {
+    width: 100%;
+    height: auto;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #06827b;
+
+}
+
+button {
+    width: 200px;
+    background: none;
+    background-color: #06827b;
+    outline: none;
+    border: 2px solid #06827b;
+    color: white;
+    padding: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 12px auto;
+}
+
+#filterone {
+    float: left;
+    width: 70%;
+    height: 40%;
+
+}
+
+#filtertwo {
+    height: 40%;
+}

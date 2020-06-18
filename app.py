@@ -1,21 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, abort
+from flask import Flask, render_template, request, redirect, url_for, flash
 import json
 import os.path
 import ipinfo
-from dotenv import load_dotenv
 
 # google maps
 from flask_googlemaps import GoogleMaps, Map
 from googleplaces import GooglePlaces, types, lang
-
-# Twilio
-from twilio.jwt.access_token import AccessToken
-from twilio.jwt.access_token.grants import VideoGrant
-
-load_dotenv()
-twilio_account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
-twilio_api_key_sid = os.environ.get('TWILIO_API_KEY_SID')
-twilio_api_key_secret = os.environ.get('TWILIO_API_KEY_SECRET')
 
 # Begining app
 app = Flask(__name__)
@@ -240,24 +230,11 @@ def storeUserInfo():
 @app.route('/consult')
 def consult():
 
-    return render_template('consult.html')
+    # Needs to redirect to the port where the video module is running
+    return redirect('http://localhost:3000')
 
 # Search results
 @app.route('/search')
 def list():
 
     return render_template('list.html')
-
-
-# Adding participant
-@app.route('/login', methods=['POST'])
-def login():
-    username = request.get_json(force=True).get('username')
-    if not username:
-        abort(401)
-
-    token = AccessToken(twilio_account_sid, twilio_api_key_sid,
-                        twilio_api_key_secret, identity=username)
-    token.add_grant(VideoGrant(room='My Room'))
-
-    return {'token': token.to_jwt().decode()}
