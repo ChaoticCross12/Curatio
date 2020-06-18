@@ -5,6 +5,10 @@
 </head>
 
 <body>
+    <div id="header">
+        <div id="logo">CURATIO</div>
+    </div>
+    <br><br>
     <div class="container">
         <div class="box">
             <div class="consult">
@@ -13,32 +17,53 @@
         </div>
 
         <br><span style="text-align: center;">or</span><br><br>
-        
+
         <div class="box" id="filterone">
+
             <h2>Show us where it hurts</h2>
-            <div>
-                <input type="radio" id="frontal" name="" value="frontal">
-                <label for="frontal">Frontal</label>
-                <input type="radio" id="mid" name="" value="mid">
-                <label for="mid">Mid</label>
-                <input type="radio" id="hind" name="" value="hind">
-                <label for="hind">Hind</label></div>
+            <!--    figure      -->
+            <div id="filterleft" style="padding-left: 9%;"><br>
+                <input type="radio" id="eye" name="" value="eye"> <br><br>
+                <input type="radio" id="mouth" name="" value="mouth"><br><br>
+                <input type="radio" id="shoulder" name="" value="shoulder"><br><br><br>
+                <input type="radio" id="chest" name="" value="chest"><br><br><br>
+                <input type="radio" id="arm" name="" value="arm"><br><br><br><br>
+                <input type="radio" id="wrist" name="" value="wrist"><br><br><br><br><br>
+                <input type="radio" id="fingers" name="" value="fingers"><br><br><br>
+                <input type="radio" id="leg" name="" value="leg"><br><br><br><br><br><br><br><br>
+                <input type="radio" id="foot" name="" value="foot">
+            </div>
+
+            <div style="padding-left: 50px;">
+                <img src="/static/fig.jpeg" alt="" style="float: left; display: inline;height: 600;">
+
+                <div id="" style="padding: 10px;">
+                    <input type="radio" id="head" name="" value="head"> <br><br>
+                    <input type="radio" id="ear" name="" value="ear"><br><br>
+                    <input type="radio" id="neck" name="" value="neck"><br><br><br><br><br>
+                    <input type="radio" id="stomach" name="" value="stomach"><br><br>
+                    <input type="radio" id="elbow" name="" value="elbow"><br><br><br><br><br><br><br>
+                    <input type="radio" id="hand" name="" value="hand"><br><br><br><br><br>
+                    <input type="radio" id="knees" name="" value="knees"><br><br><br><br><br><br><br><br><br>
+                    <input type="radio" id="toes" name="" value="toes">
+                </div>
+            </div>
         </div>
+        <div id="filterright"></div>
 
         <div class="box" id="filtertwo">
             <h2>Possible symptoms</h2>
             <div>
-                <input type="checkbox" id="one" name="" value="one">
-                <label for="one">Unnamed</label><br>
-                <input type="checkbox" id="one" name="" value="one">
-                <label for="one">Unnamed</label><br>
-                <input type="checkbox" id="one" name="" value="one">
-                <label for="one">Unnamed</label><br>
+                <!--    symptoms      -->
+                {% for word in symptoms %}
+                <input type="checkbox" id="" name="{{word}}" value="{{word}}">
+                <label for="{{word}}">{{word}}</label><br>
+                {% endfor %}
+
             </div>
         </div>
 
         <div class="box">
-
             <!--<h2>Extra notes to the doctor</h2>-->
             <div>
                 <input name="notes" id="notes" type="text" placeholder="Extra notes to the doctor..."></input>
@@ -46,6 +71,6 @@
 
             </div>
         </div>
-
+        <br><br><br>
     </div>
 </body>

@@ -92,8 +92,29 @@ def services():
 
 @app.route('/treatment_physical')
 def treatment_physical():
-
-    return render_template('treatment_physical.html')
+    symptoms = """Eye Irritation
+        Runny nose
+        Stuffy nose
+        Puffy/Watery eyes
+        Inflamed/Itchy nose and throat
+        Skin rash
+        Wheezing
+        Gastrointestinal distress
+        Lightheadedness/Fainting
+        Fever
+        Headache
+        Dry cough
+        Fatigue
+        Burning sensation
+        Watery, loose stools
+        Frequent bowel movements
+        Cramping or pain in the abdomen
+        Nausea
+        Insomnia
+        Vomiting
+        Hepatitis"""
+    symptoms = symptoms.replace("\t","").split("\n")
+    return render_template('treatment_physical.html', symptoms=symptoms)
 
 
 @app.route('/treatment_mental')
