@@ -29,6 +29,12 @@ def signUpPage():
     return render_template('signUp.html')
 
 
+# Doctor Sign Up page
+@app.route('/docSignUp', methods = ['GET', 'POST'])
+def docSignUpPage():
+    return render_template('docSignUp.html')
+
+
 # Logging in
 @app.route('/home', methods = ['GE9T', 'POST'])
 def your_url():
@@ -251,7 +257,8 @@ def storeUserInfo():
 @app.route('/consult')
 def consult():
 
-    return render_template('consult.html')
+        # Needs to redirect to the port where the video module is running
+        return redirect('http://localhost:3000')
 
 # Search results
 @app.route('/search')

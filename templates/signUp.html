@@ -19,7 +19,7 @@
   <div class="auth-box">
     <form action="/" method="post">
 
-      <h1>Sign Up</h1>
+      <h1>Patient Sign Up</h1>
 
       <div class="text-box">
         <i class="fa fa-user" aria-hidden="true"></i>
@@ -39,12 +39,6 @@
         <br>
       </div>
 
-      <div class="radio">
-        <input type="radio" id="patient" name="client" value="patient" required>
-        <label for="patient">Patient</label>
-        <input type="radio" id="doctor" name="client" value="doctor">
-        <label for="doctor">Doctor</label>
-      </div>
 
       <div class="err_notice">
         {% for message in get_flashed_messages() %}
@@ -54,6 +48,7 @@
 
       <input class="btn" type="submit" name="" value="SIGN UP">
     </form>
+
   </div>
   </div>
 
