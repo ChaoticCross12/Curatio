@@ -2,6 +2,16 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import json
 import os.path
 import ipinfo
+from square.client import Client
+import json
+
+# square API
+client = Client(
+    access_token='EAAAEPFPFdbS4HtT08WwOGtHJg0Nit3jU6C_7zrVMY1DRh3NPH_up3cqpGEpozOx',
+    environment='production',)
+
+customers_api = client.customers
+
 
 # google maps
 from flask_googlemaps import GoogleMaps, Map
@@ -265,3 +275,44 @@ def consult():
 def list():
 
     return render_template('list.html')
+
+
+def new_customer(name, email, phone, address, note):
+    body = {}
+    body['nickname'] = name
+    body['email_address'] = email
+    body['phone_number'] = phone
+    body['address'] = {}
+    body['address']['add'] = address
+    body['note'] = note
+    print(body)
+    result = customers_api.create_customer(body)
+    if result.is_success():
+        print(result.body)
+    elif result.is_error():
+        print(result.errors)
+    else:
+        print("unknown error")
+
+    print("...")
+
+
+def list_all_customers():
+
+    result = customers_api.list_customers()
+
+    if result.is_success():
+        return result.body
+
+    elif result.is_error():
+        return result.errors
+
+
+def delete_customer(id):
+
+    result = customers_api.delete_customer(id)
+
+    if result.is_success():
+        return result.body
+    elif result.is_error():
+        return result.errors
