@@ -1,13 +1,47 @@
 <head>
     <title>Curatio</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/static/css/physical.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/list.css">
+    <style>
+        .box a {
+            color: black;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
-    <div>
-        {% for i in range(4) %}
-            {% set service = services[i] %}
-            {% set link = services_link[i] %}
-            <ol><a href="{{ link }}"> {{ service }} </a></ol>
-        {% endfor %}
+    <div id="header">
+        <div id="logo">CURATIO</div>
+    </div><br><br>
+
+
+    <div class="container">
+ 
+        <div class="box" id="filterone">
+
+            <h2>box 1</h2>
+            <div>
+                <a href="{{services_link[0]}}"> physical </a>
+                <br>
+                <a href="{{services_link[1]}}"> mental </a>
+            </div>
+
+        </div>
+
+
+        <div class="box" id="filtertwo" style="height: 700px;">
+
+            <h2>box2</h2>
+            <div style="text-align: center;">
+                <a href="{{services_link[2]}}"> clinic </a>
+                <br>
+                <a href="{{services_link[3]}}"> drugstore </a>
+            </div>
+
+        </div>
+
+
     </div>
 </body>
