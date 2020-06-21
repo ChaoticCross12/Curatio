@@ -2,16 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import json
 import os.path
 import ipinfo
-from square.client import Client
-import json
-
-# square API
-client = Client(
-    access_token='EAAAEPFPFdbS4HtT08WwOGtHJg0Nit3jU6C_7zrVMY1DRh3NPH_up3cqpGEpozOx',
-    environment='production',)
-
-customers_api = client.customers
-
 
 # google maps
 from flask_googlemaps import GoogleMaps, Map
@@ -255,14 +245,6 @@ def storeUserInfo():
 
 
 
-
-        # If json file doesn't exist
-        else:
-            print('need work')
-            return render_template('login.html')
-            # TO BE CONTINUED
-
-
 # Contact a general practitioner
 @app.route('/consult')
 def consult():
@@ -277,42 +259,39 @@ def list():
     return render_template('list.html')
 
 
-def new_customer(name, email, phone, address, note):
-    body = {}
-    body['nickname'] = name
-    body['email_address'] = email
-    body['phone_number'] = phone
-    body['address'] = {}
-    body['address']['add'] = address
-    body['note'] = note
-    print(body)
-    result = customers_api.create_customer(body)
-    if result.is_success():
-        print(result.body)
-    elif result.is_error():
-        print(result.errors)
-    else:
-        print("unknown error")
+# Doctor sign up
+@app.route('/docSigned', methods = ['GET', 'POST'])
+def docSignUpFunc():
+    # Check method
+    if request.method == 'POST':
 
-    print("...")
+        # Dictioary for data
+        OldLoginData = {}
 
+        # Checking if json file exists
+        if os.path.exists('loginInfo.json'):
 
-def list_all_customers():
+            with open('loginInfo.json') as old_login_file:
 
-    result = customers_api.list_customers()
+                # Adding data from json file to dictionary
+                OldLoginData = json.load(old_login_file)
+                loginDataSet = OldLoginData[request.form['client']]
 
-    if result.is_success():
-        return result.body
+                if request.form['username'] in loginDataSet.keys():
+                    flash('Username already taken')
+                    return render_template('signUp.html')
+                    # FLASK MESSAGE
 
-    elif result.is_error():
-        return result.errors
+                else:
+                    # NEEDS WORK
+                    loginDataSet[request.form['username']]  = request.form['password']
+                    OldLoginData[request.form['client']] = loginDataSet
+                    #
 
+            with open('loginInfo.json', 'w') as old_login_file:
 
-def delete_customer(id):
+                # Adding dictionary to json file
+                json.dump(OldLoginData, old_login_file)
+                return render_template('login.html')
 
-    result = customers_api.delete_customer(id)
-
-    if result.is_success():
-        return result.body
-    elif result.is_error():
-        return result.errors
+    return redirect('/')

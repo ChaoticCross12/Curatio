@@ -5,6 +5,54 @@
     <title></title>
   </head>
   <body>
-    <h1>doctor sign up</h1>
+    <div class="auth-box">
+      <form action="/docSigned" method="post">
+
+        <h1>Doctor Sign Up</h1>
+
+        <div class="text-box">
+          <i class="fa fa-user" aria-hidden="true"></i>
+          <input type="text" placeholder="Username" name="username" value="" required>
+          <br>
+        </div>
+
+        <div class="text-box">
+          <i class="fa fa-key" aria-hidden="true"></i>
+          <input type="password" placeholder="Password" name="password" value="" required>
+          <br>
+        </div>
+
+        <div class="text-box">
+          <i class="fa fa-key" aria-hidden="true"></i>
+          <input type="password" placeholder="Confirm Password" name="ConfPassword" value="" required>
+          <br>
+        </div>
+
+        <div class="text-box">
+          <i class="fa fa-key" aria-hidden="true"></i>
+          <input type="text" placeholder="Address" name="address" value="" required>
+          <br>
+        </div>
+
+        <div class="text-box">
+          <i class="fa fa-key" aria-hidden="true"></i>
+          <input type="number" placeholder="Phone number" name="PhnNum" value="" required>
+          <br>
+        </div>
+
+        <div class="form-radio">
+          <input type="radio" id="doctor" name="client" value="doctor" checked="checked" required>
+        </div>
+
+        <div class="err_notice">
+          {% for message in get_flashed_messages() %}
+          <h2>{{ message }}</h2>
+          {% endfor %}
+        </div>
+
+        <input class="btn" type="submit" name="" value="SIGN UP">
+      </form>
+
+    </div>
   </body>
 </html>
