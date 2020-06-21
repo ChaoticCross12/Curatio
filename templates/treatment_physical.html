@@ -1,7 +1,6 @@
 <head>
     <title>Curatio - Physical Treatment</title>
     <link rel="stylesheet" type="text/css" href="/static/css/physical.css">
-
 </head>
 
 <body>
@@ -51,9 +50,13 @@
         </div>
         <div id="filterright"></div>
 
+        
+        <form action="/search" method="post">
+
         <div class="box" id="filtertwo">
             <h2>Possible symptoms</h2>
             <div>
+
                 <!--    symptoms      -->
                 {% for word in symptoms %}
                 <input type="checkbox" id="" name="{{word}}" value="{{word}}">
@@ -71,6 +74,7 @@
 
             </div>
         </div>
+        </form>
         <br><br><br>
     </div>
 </body>
