@@ -2,6 +2,17 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import json
 import os.path
 import ipinfo
+from square.client import Client
+import json
+
+
+
+# square API
+client = Client(
+    access_token='EAAAEPFPFdbS4HtT08WwOGtHJg0Nit3jU6C_7zrVMY1DRh3NPH_up3cqpGEpozOx',
+    environment='production',)
+
+customers_api = client.customers
 
 # google maps
 from flask_googlemaps import GoogleMaps, Map
@@ -15,6 +26,7 @@ app.secret_key = "suidhfliasdfoagdrgdeocf"
 MAPS_API_KEY = 'AIzaSyCskEcqqtB89CfG-jJXihqF20SZSlRxzFo'
 app.config['GOOGLEMAPS_KEY'] = MAPS_API_KEY
 GoogleMaps(app)
+
 
 
 # Initial Page
@@ -292,6 +304,59 @@ def docSignUpFunc():
 
                 # Adding dictionary to json file
                 json.dump(OldLoginData, old_login_file)
+
+                # sign up successful
+                name = request.form['name']
+                email = request.form['email']
+                phone = request.form['phonenumber']
+                address = request.form['address']
+                note = request.form['note']
+
+                # writing new doctor details
+                new_customer(name, email, phone, address, note)
+
                 return render_template('login.html')
 
     return redirect('/')
+
+
+
+def new_customer(name, email, phone, address, note):
+    body = {}
+    body['nickname'] = name
+    body['email_address'] = email
+    body['phone_number'] = phone
+    body['address'] = {}
+    body['address']['add'] = address
+    body['note'] = note
+    print(body)
+    result = customers_api.create_customer(body)
+    if result.is_success():
+        return result.body
+    elif result.is_error():
+        return result.errors
+    else:
+        return "unknown error"
+
+
+def list_all_customers():
+
+    result = customers_api.list_customers()
+
+    if result.is_success():
+        return result.body
+
+    elif result.is_error():
+        return result.errors
+    else:
+        return "unknown error"
+
+
+def delete_customer(id):
+
+    result = customers_api.delete_customer(id)
+
+    if result.is_success():
+        return result.body
+    elif result.is_error():
+        return result.errors

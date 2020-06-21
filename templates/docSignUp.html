@@ -1,58 +1,87 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <div class="auth-box">
-      <form action="/docSigned" method="post">
 
-        <h1>Doctor Sign Up</h1>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+  <title>Curatio Signup</title>
+</head>
 
-        <div class="text-box">
-          <i class="fa fa-user" aria-hidden="true"></i>
-          <input type="text" placeholder="Username" name="username" value="" required>
-          <br>
-        </div>
+<body>
+  <div class="box">
 
-        <div class="text-box">
-          <i class="fa fa-key" aria-hidden="true"></i>
-          <input type="password" placeholder="Password" name="password" value="" required>
-          <br>
-        </div>
+    <h1>CURATIO</h1>
 
-        <div class="text-box">
-          <i class="fa fa-key" aria-hidden="true"></i>
-          <input type="password" placeholder="Confirm Password" name="ConfPassword" value="" required>
-          <br>
-        </div>
+  </div>
+  
+  <div class="auth-box">
+    <form action="/docSigned" method="post">
 
-        <div class="text-box">
-          <i class="fa fa-key" aria-hidden="true"></i>
-          <input type="text" placeholder="Address" name="address" value="" required>
-          <br>
-        </div>
+      <h1>Doctor Sign Up</h1>
 
-        <div class="text-box">
-          <i class="fa fa-key" aria-hidden="true"></i>
-          <input type="number" placeholder="Phone number" name="PhnNum" value="" required>
-          <br>
-        </div>
+      <div class="text-box">
+        <i class="fa fa-key" aria-hidden="true"></i>
+        <input type="text" placeholder="Name" name="name" value="" required>
+        <br>
+      </div>
 
-        <div class="form-radio">
-          <input type="radio" id="doctor" name="client" value="doctor" checked="checked" required>
-        </div>
+      <div class="text-box">
+        <i class="fa fa-key" aria-hidden="true"></i>
+        <input type="text" placeholder="Email" name="email" value="" required>
+        <br>
+      </div>
 
-        <div class="err_notice">
-          {% for message in get_flashed_messages() %}
-          <h2>{{ message }}</h2>
-          {% endfor %}
-        </div>
+      <div class="text-box">
+        <i class="fa fa-key" aria-hidden="true"></i>
+        <input type="number" placeholder="Phone number" name="phonenumber" value="" required>
+        <br>
+      </div>
 
-        <input class="btn" type="submit" name="" value="SIGN UP">
-      </form>
+      <div class="text-box">
+        <i class="fa fa-key" aria-hidden="true"></i>
+        <input type="text" placeholder="Address" name="address" value="" required>
+        <br>
+      </div>
 
-    </div>
-  </body>
+      <div class="text-box">
+        <i class="fa fa-key" aria-hidden="true"></i>
+        <input type="text" placeholder="other item" name="note" value="" required>
+        <br>
+      </div>
+
+      <div class="text-box">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <input type="text" placeholder="Username" name="username" value="" required>
+        <br>
+      </div>
+
+      <div class="text-box">
+        <i class="fa fa-key" aria-hidden="true"></i>
+        <input type="password" placeholder="Password" name="password" value="" required>
+        <br>
+      </div>
+
+      <div class="text-box">
+        <i class="fa fa-key" aria-hidden="true"></i>
+        <input type="password" placeholder="Confirm Password" name="ConfPassword" value="" required>
+        <br>
+      </div>
+
+
+      <div class="form-radio">
+        <input type="radio" id="doctor" name="client" value="doctor" checked="checked" required>
+      </div>
+
+      <div class="err_notice">
+        {% for message in get_flashed_messages() %}
+        <h2>{{ message }}</h2>
+        {% endfor %}
+      </div>
+
+      <input class="btn" type="submit" name="" value="SIGN UP">
+    </form>
+
+  </div>
+</body>
+
 </html>
