@@ -1,9 +1,42 @@
 <head>
-    <title>m Curatio - Treatment</title>
+    <title>Curatio - Mental Treatment</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/physical.css">
 </head>
 
 <body>
-    <div>
-        
+    <div id="header">
+        <div id="logo">CURATIO</div>
+    </div>
+    <br><br>
+    <div class="container">
+        <div class="box">
+            <div class="consult">
+                <a href="consult">Contact a general practitioner RIGHT NOW</a>
+            </div>
+        </div>
+
+        <br><span style="text-align: center;">or</span><br><br>
+
+
+        <div class="box">
+            <h2>Headline</h2>
+            <form action="/search" method="post">
+
+                <!--<h2>Extra notes to the doctor</h2>-->
+                <div>              
+                    <label for="notes">question 1</label>
+                    <input name="one" id="notes" type="text" placeholder="Notes to the doctor..."></input><br><br>
+                    <label for="notes">question 2</label>
+                    <input name="two" id="notes" type="text" placeholder="Notes to the doctor..."></input><br><br>
+                    <label for="notes">question 3</label>
+                    <input name="three" id="notes" type="text" placeholder="Notes to the doctor..."></input><br><br>
+                    <label for="notes">question 4</label>
+                    <input name="four" id="notes" type="text" placeholder="Notes to the doctor..."></input><br><br>
+                    <button type="submit" value="search">FIND</button>
+
+                </div>
+            </form>
+        </div>
+        <br><br><br>
     </div>
 </body>
