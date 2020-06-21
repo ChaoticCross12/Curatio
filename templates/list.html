@@ -1,6 +1,36 @@
 <head>
     <title>Curatio - Search</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/static/css/physical.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/list.css">
 </head>
+
 <body>
-    search results page
+    <div id="header">
+        <div id="logo">CURATIO</div>
+    </div>
+    <br><br>
+    <div class="container">
+        <div class="box">
+            <h2>List of Available Doctors</h2><br><br>
+            <ul>
+                {% for i in range(0, total) %}
+                {% set id = ids[i] %}
+                {% set name = names[i] %}
+                {% set note = notes[i] %}
+                {% set phone = phones[i] %}
+
+
+                <li>
+                    <a href="{{ link }}"><b id="docname">{{name}}</b></a>
+                    <br>{{note}} <br> 
+                    <i class="fa fa-phone" aria-hidden="true"></i><span>    Phone: {{phone}}</span>
+
+                </li>
+
+                {% endfor %}
+            </ul>
+            <br><br>
+        </div>
+    </div>
 </body>

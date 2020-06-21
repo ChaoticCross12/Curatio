@@ -265,10 +265,27 @@ def consult():
         return redirect('http://localhost:3000')
 
 # Search results
-@app.route('/search')
+@app.route('/search', methods = ['GET', 'POST'])
 def list():
+    try:
+        x = list_all_customers()["customers"]
+    except KeyError:
+        return "no registered users found"
 
-    return render_template('list.html')
+    x = list_all_customers()["customers"]
+    ids = []
+    names = []
+    notes = []
+    phones = []
+    for item in x:
+        print(item)
+        ids.append(item["id"])
+        names.append(item["nickname"])
+        notes.append(item["note"])
+        phones.append(item["phone_number"])
+
+    total = len(ids)
+    return render_template('list.html', names=names, ids=ids, notes=notes, phones=phones, total=total)
 
 
 # Doctor sign up
