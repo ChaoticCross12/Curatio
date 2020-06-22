@@ -3,6 +3,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/static/css/physical.css">
     <link rel="stylesheet" type="text/css" href="/static/css/list.css">
+
     <style>
         .box a {
             color: black;
@@ -17,30 +18,40 @@
     </div><br><br>
 
 
-    <div class="container">
- 
-        <div class="box" id="filterone">
+    <div class="container box" style="width: 70%;">
 
-            <h2>box 1</h2>
-            <div>
-                <a href="{{services_link[0]}}"> physical </a>
-                <br>
-                <a href="{{services_link[1]}}"> mental </a>
+        <div class="" id="filterone" style="width: 60%; height: 500px;">
+
+
+
+            <div style="padding: 0px; padding-right: 20px;">
+            
+
+                <div style="text-align: center;">
+                    <br>
+    
+                    <div class="ss" id="three" style="margin-left: 0px; margin-right: 20px;"><a href="{{services_link[0]}}"> Physical Treatment</a></div>
+                    <br><br><br>
+                    <div class="ss" id="four" style="margin-left: 0px; margin-right: 20px;"><a href="{{services_link[1]}}" > Mental Treatment </a></div>
+    
+                </div>
             </div>
 
         </div>
 
 
-        <div class="box" id="filtertwo" style="height: 700px;">
+        <div id="filtertwo" style="height: 500px;">
 
-            <h2>box2</h2>
             <div style="text-align: center;">
-                <a href="{{services_link[2]}}"> clinic </a>
                 <br>
-                <a href="{{services_link[3]}}"> drugstore </a>
+
+                <div class="ss" id="one"><a href="{{services_link[2]}}"> Find Nearest Clinic</a></div>
+                <br><br><br>
+                <div class="ss" id="two"><a href="{{services_link[3]}}" > Find Nearest Drugstore </a></div>
+
             </div>
 
-        </div>
+        </div><br>
 
 
     </div>
