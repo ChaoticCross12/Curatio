@@ -1,0 +1,28 @@
+APIs USED:
+
+The doctor's sign in module was make using SQUARE's CUSTOMER API.
+Along with that we used Google Cloud's Maps API in our flask based webapp.
+
+
+
+
+
+RUNNING THE WEBAPP:
+
+** The computer needs to have Python and pip installed **
+
+1) First we need to create a virtual environment by opening a terminal and directing it to the directory of the app.
+2) We then run "pipenv update" to get the the necessary dependencies installed.
+2) Then we can run "pipenv flask run"
+3) Run "npm start" on a separate terminal that is redirected to "Curatio/Video Module"
+4) Run /misc/remove_doctor_db.py to clear all "customers" data
+
+
+DEPENDEINCEIS USED:
+
+1) pipenv
+2) flask
+3) flask_googlemaps
+4) googleplaces
+5) ipinfo
+6) squareup
