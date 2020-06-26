@@ -9,7 +9,7 @@ import json
 
 # square API
 client = Client(
-    access_token='EAAAEPFPFdbS4HtT08WwOGtHJg0Nit3jU6C_7zrVMY1DRh3NPH_up3cqpGEpozOx',
+    access_token='SQUARE_API_KEY',
     environment='production',)
 
 customers_api = client.customers
@@ -23,7 +23,7 @@ app = Flask(__name__)
 app.secret_key = "suidhfliasdfoagdrgdeocf"
 #app.run(debug=True)
 
-MAPS_API_KEY = 'AIzaSyCskEcqqtB89CfG-jJXihqF20SZSlRxzFo'
+MAPS_API_KEY = 'GOOGLE_MAPS_API_KEY'
 app.config['GOOGLEMAPS_KEY'] = MAPS_API_KEY
 GoogleMaps(app)
 
