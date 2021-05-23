@@ -10,8 +10,11 @@ We wanted to come up with a simple solution for contactless healthcare.
 ## What it does
 Curatio helps patients connect to doctors and receive information regarding healthcare according to the patients needs as much as possible without physically being in contact with the doctor or be at a hospital
 
-## How we built it
-Curatio has been made using the Flask web framework and Node.js runtime environment. We built it by combining multiple modules made from scratch, APIs from square and google cloud and also some open source modules that were made available to the public on the internet.
+## Tech Stack
+1) Flask
+2) Node.js
+3) Google Maps API
+4) Square API
 
 ## Challenges we ran into
 We had a difficult time building a database management system for the logging in module for the webapp. We also faced some challenges when implementing the video calling feature but much research and trials, we managed to make it work. Another challenge we were facing was trying to find the user location for our map based features but in the end we managed to overcome all of them.
