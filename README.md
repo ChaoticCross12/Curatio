@@ -1,7 +1,7 @@
 # Curatio
 A solution to contact free healthcare for The Square Small Business Hackathon
 
-
+![alt text](gitImg.png)
 
 
 ## Inspiration
